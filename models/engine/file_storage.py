@@ -2,6 +2,8 @@
 
 import json
 from os import path
+from models.base_model import BaseModel
+from datetime import datetime
 
 class FileStorage():
 	__file_path = "file.json"
@@ -11,14 +13,19 @@ class FileStorage():
 		return self.__objects
 
 	def new(self, obj):
-		self.__objects["{}.{}".format(obj.__class__.__name__, obj.id)] = obj.to_dict()
+		self.__objects[f"{obj.__class__.__name__}.{obj.id}"] = obj
 
 	def save(self):
-		with open(self.__file_path, mode='w') as a_file:
-			json.dump(self.__objects, a_file, indent=4, sort_keys=True, default=str)
+		temp_dict = {}
+		for item in self.__objects:
+			temp_dict[item] = self.__objects[item].to_dict()
+
+		with open(self.__file_path, 'w', encoding="UTF-8") as a_file:
+			json.dump(temp_dict, a_file)
 	
 	def reload(self):
 		if path.isfile(self.__file_path):
 			with open(self.__file_path, mode='r') as a_file:
-				self.__objects = json.load(a_file)
-	
+				all_objs = json.load(a_file)
+			for obj_id in all_objs.keys():
+				self.__objects[obj_id] = BaseModel(**all_objs[obj_id])

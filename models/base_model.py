@@ -13,11 +13,14 @@ class BaseModel():
 			models.storage.new(self)
 		else:
 			for charac in kwargs:
-				if charac == "__class__":
-					continue
-				setattr(self, charac, kwargs[charac])
-			self.updated_at = datetime.datetime.strptime(self.updated_at, "%Y-%m-%dT%H:%M:%S.%f")
-
+				if charac != "__class__":
+					if charac == "updated_at" or charac == "created_at":
+						value = datetime.datetime.strptime(
+							kwargs[charac], "%Y-%m-%dT%H:%M:%S.%f"
+							)
+						setattr(self, charac, value)
+					else:
+						setattr(self, charac, kwargs[charac])
 	def __str__(self):
 		return "[{}] ({}) {}".format(self.__class__.__name__, self.id, self.__dict__)
 
