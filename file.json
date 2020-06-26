@@ -1,18 +1,1 @@
-{
-    "BaseModel.348221b1-2cbd-481a-8422-afa7a528a623": {
-        "__class__": "BaseModel",
-        "created_at": "2020-06-26T03:07:57.667010",
-        "id": "348221b1-2cbd-481a-8422-afa7a528a623",
-        "my_number": 89,
-        "name": "Holberton",
-        "updated_at": "2020-06-26 03:07:57.667183"
-    },
-    "BaseModel.5545ca82-83f9-4af5-909d-717d3cfc7a28": {
-        "__class__": "BaseModel",
-        "created_at": "2020-06-26T03:07:47.340049",
-        "id": "5545ca82-83f9-4af5-909d-717d3cfc7a28",
-        "my_number": 89,
-        "name": "Holberton",
-        "updated_at": "2020-06-26 03:07:47.340421"
-    }
-}
+{"BaseModel.466fceec-48ce-4304-acd5-6c48e6667af7": {"created_at": "2020-06-26T20:16:01.687851", "__class__": "BaseModel", "my_number": 89, "name": "Holberton", "id": "466fceec-48ce-4304-acd5-6c48e6667af7", "updated_at": "2020-06-26T20:16:01.687863"}, "BaseModel.89c20125-8ad9-4fc7-8a0c-5b5d9dca3010": {"created_at": "2020-06-26T20:15:56.003859", "__class__": "BaseModel", "my_number": 89, "name": "Holberton", "id": "89c20125-8ad9-4fc7-8a0c-5b5d9dca3010", "updated_at": "2020-06-26T20:15:56.003876"}, "BaseModel.cf81c10a-e968-45ea-bbb5-f43aaf97d1a6": {"created_at": "2020-06-26T20:16:06.551185", "__class__": "BaseModel", "my_number": 89, "name": "Holberton", "id": "cf81c10a-e968-45ea-bbb5-f43aaf97d1a6", "updated_at": "2020-06-26T20:16:06.551191"}}
