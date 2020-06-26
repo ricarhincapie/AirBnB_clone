@@ -1,0 +1,18 @@
+{
+    "BaseModel.348221b1-2cbd-481a-8422-afa7a528a623": {
+        "__class__": "BaseModel",
+        "created_at": "2020-06-26T03:07:57.667010",
+        "id": "348221b1-2cbd-481a-8422-afa7a528a623",
+        "my_number": 89,
+        "name": "Holberton",
+        "updated_at": "2020-06-26 03:07:57.667183"
+    },
+    "BaseModel.5545ca82-83f9-4af5-909d-717d3cfc7a28": {
+        "__class__": "BaseModel",
+        "created_at": "2020-06-26T03:07:47.340049",
+        "id": "5545ca82-83f9-4af5-909d-717d3cfc7a28",
+        "my_number": 89,
+        "name": "Holberton",
+        "updated_at": "2020-06-26 03:07:47.340421"
+    }
+}
