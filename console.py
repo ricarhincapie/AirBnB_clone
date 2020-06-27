@@ -67,6 +67,22 @@ class HBNBCommand(cmd.Cmd):
 						models.storage.reload()
 					except:
 						print("** no instance found **")
-
+	
+	def do_all(self, arg):
+		my_arr = []
+		if len(arg) > 0:
+			if arg == "BaseModel":
+				my_dict = models.storage.all()
+				for key, value in my_dict.items():
+					my_arr.append(str(value))
+				print(my_arr)
+			else:
+				print("** class doesn't exist **")
+		else:
+			my_dict = models.storage.all()
+			for key, value in my_dict.items():
+				my_arr.append(str(value))
+			print(my_arr)
+				
 if __name__ == "__main__":
 	HBNBCommand().cmdloop()
