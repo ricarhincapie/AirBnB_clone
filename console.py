@@ -87,12 +87,12 @@ class HBNBCommand(cmd.Cmd):
 	def do_update(self, arg):
 		arguments = arg.split()
 		class_name = arguments[0]
-		id = arguments[1]
+		my_id = arguments[1]
 		attribute_name = arguments[2]
 		attribute_value = arguments[3]
 		my_dict = models.storage.all()
-		my_dict[class_name+"."+id].attribute_name = attribute_value
-		print(my_dict[class_name+"."+id].attribute_name)
+		my_dict[class_name+"."+my_id].attribute_name = attribute_value
+		print(my_dict[class_name+"."+my_id].attribute_name)
 
 if __name__ == "__main__":
 	HBNBCommand().cmdloop()
