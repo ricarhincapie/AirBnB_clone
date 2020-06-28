@@ -28,5 +28,6 @@ class FileStorage():
 		if path.isfile(self.__file_path):
 			with open(self.__file_path, mode='r') as a_file:
 				all_objs = json.load(a_file)
+
 			for obj_id in all_objs.keys():
 				self.__objects[obj_id] = BaseModel(**all_objs[obj_id])
