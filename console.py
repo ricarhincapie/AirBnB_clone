@@ -27,7 +27,7 @@ class HBNBCommand(cmd.Cmd):
 		else:
 			if arg == "BaseModel":
 				new_obj = BaseModel()
-				models.storage.save()
+				new_obj.save()
 				print(new_obj.id)
 			else:
 				print("** class doesn't exist **")
@@ -94,8 +94,5 @@ class HBNBCommand(cmd.Cmd):
 		my_dict[class_name+"."+id].attribute_name = attribute_value
 		print(my_dict[class_name+"."+id].attribute_name)
 
-
-
-				
 if __name__ == "__main__":
 	HBNBCommand().cmdloop()
