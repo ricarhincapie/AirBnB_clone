@@ -3,11 +3,12 @@
 import sys
 import cmd
 from models.base_model import BaseModel
+from models.user import User
 import models
 
 class HBNBCommand(cmd.Cmd):
 	prompt = "(hbnb) "
-
+	valid_class = ["BaseModel", "User"]
 	def do_quit(self, arg):
 		"""Quit command to exit the program
 		"""        
@@ -25,8 +26,8 @@ class HBNBCommand(cmd.Cmd):
 		if len(arg) <= 0:
 			print("** class name missing **")
 		else:
-			if arg == "BaseModel":
-				new_obj = BaseModel()
+			if arg in self.valid_class:
+				new_obj = eval(arg)()
 				new_obj.save()
 				print(new_obj.id)
 			else:
@@ -40,7 +41,7 @@ class HBNBCommand(cmd.Cmd):
 			if len(arguments) == 1:
 				print("** instance id missing **")
 			else:
-				if arguments[0] != "BaseModel":
+				if arguments[0] not in self.valid_class:
 					print("** class doesn't exist **")
 				else:
 					objects = models.storage.all()
@@ -54,7 +55,7 @@ class HBNBCommand(cmd.Cmd):
 			print("** class name missing **")
 		else:
 			arguments = arg.split()
-			if arguments[0] != "BaseModel":
+			if arguments[0] not in self.valid_class:
 				print("** class doesn't exist **")
 			else:
 				if len(arguments) == 1:
@@ -71,7 +72,7 @@ class HBNBCommand(cmd.Cmd):
 	def do_all(self, arg):
 		my_arr = []
 		if len(arg) > 0:
-			if arg == "BaseModel":
+			if arg in self.valid_class:
 				my_dict = models.storage.all()
 				for key, value in my_dict.items():
 					my_arr.append(str(value))
@@ -87,13 +88,12 @@ class HBNBCommand(cmd.Cmd):
 	def do_update(self, arg):
 		arguments = arg.split()
 		my_dict = models.storage.all()
-		valid_class = ["BaseModel"]
 		if len(arguments) == 0:
 			print("** class name missing **")
 			
 		elif len(arguments) == 1:
 			class_name = arguments[0]
-			if class_name not in valid_class:
+			if class_name not in self.valid_class:
 				print("** class doesn't exist **")
 			print("** instance id missing **")
 		elif len(arguments) == 2:

@@ -4,6 +4,7 @@ import json
 from os import path
 from models.base_model import BaseModel
 from datetime import datetime
+from models.user import User
 
 class FileStorage():
 	__file_path = "file.json"
@@ -30,4 +31,5 @@ class FileStorage():
 				all_objs = json.load(a_file)
 
 			for obj_id in all_objs.keys():
-				self.__objects[obj_id] = BaseModel(**all_objs[obj_id])
+				class_name = all_objs[obj_id]["__class__"]
+				self.__objects[obj_id] = eval(class_name)(**all_objs[obj_id])
