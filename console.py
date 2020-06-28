@@ -109,10 +109,8 @@ class HBNBCommand(cmd.Cmd):
 			class_name = arguments[0]
 			my_id = arguments[1]
 			attribute_name = arguments[2]
-			attribute_value = arguments[3]
+			attribute_value = arg.split("\"")[1]
 			setattr(my_dict[class_name+"."+my_id], attribute_name, attribute_value)
-			
-			# my_dict[class_name+"."+my_id].attribute_name = attribute_value
 
 if __name__ == "__main__":
 	HBNBCommand().cmdloop()
