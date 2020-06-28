@@ -33,4 +33,5 @@ class BaseModel():
 		dic["__class__"] = self.__class__.__name__
 		dic["created_at"] = self.created_at.isoformat()
 		dic["updated_at"] = self.updated_at.isoformat()
+
 		return dic
