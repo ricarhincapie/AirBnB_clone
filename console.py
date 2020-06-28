@@ -86,13 +86,30 @@ class HBNBCommand(cmd.Cmd):
 	
 	def do_update(self, arg):
 		arguments = arg.split()
-		class_name = arguments[0]
-		my_id = arguments[1]
-		attribute_name = arguments[2]
-		attribute_value = arguments[3]
-		my_dict = models.storage.all()
-		my_dict[class_name+"."+my_id].attribute_name = attribute_value
-		print(my_dict[class_name+"."+my_id].attribute_name)
+		valid_class = ["BaseModel"]
+		if len(arguments) == 0:
+			print("** class name missing **")
+			
+		elif len(arguments) == 1:
+			class_name = arguments[0]
+			if class_name not in valid_class:
+				print("** class doesn't exist **")
+			print("** instance id missing **")
+		elif len(arguments) == 2:
+			print("** attribute name missing **") # Id validation pending
+		elif len(arguments) == 3:
+			print("** value missing **")
+		else:
+			else:	
+				my_dict = models.storage.all()
+				my_id = arguments[1]
+				attribute_name = arguments[2]
+				attribute_value = arguments[3]
+				if class_name+"."+my_id in my_dict:
+					my_dict[class_name+"."+my_id].attribute_name = attribute_value
+				else:
+					print("** no instance found **")
+				print(my_dict[class_name+"."+my_id].attribute_name)
 
 if __name__ == "__main__":
 	HBNBCommand().cmdloop()
