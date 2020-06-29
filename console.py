@@ -35,6 +35,7 @@ class HBNBCommand(cmd.Cmd):
         Arguments:
         EOF
         """
+        print("", end="")
         sys.exit()
 
     def emptyline(self):
@@ -112,10 +113,7 @@ class HBNBCommand(cmd.Cmd):
                 for key, value in my_dict.items():
                     if key.split(".")[0] == arg:
                         my_arr.append(str(value))
-                if len(my_arr) == 0:
-                    print("")
-                else:
-                    print(my_arr)
+                print(my_arr)
             else:
                 print("** class doesn't exist **")
         else:
@@ -141,20 +139,38 @@ class HBNBCommand(cmd.Cmd):
                 print("** instance id missing **")
         elif len(arguments) == 2:
             class_name = arguments[0]
-            my_id = arguments[1]
-            if class_name+"."+my_id not in my_dict:
-                print("** no instance found **")
+            if class_name not in self.valid_class:
+                print("** class doesn't exist **")
             else:
-                print("** attribute name missing **")  # Id validation pending
+                my_id = arguments[1]
+                if class_name+"."+my_id not in my_dict:
+                    print("** no instance found **")
+                else:
+                    print("** attribute name missing **")  # Id validation pending
         elif len(arguments) == 3:
-            print("** value missing **")
+            if class_name not in self.valid_class:
+                print("** class doesn't exist **")
+            else:
+                print("** value missing **")
         else:
             class_name = arguments[0]
-            my_id = arguments[1]
-            attribute_name = arguments[2]
-            attribute_value = arg.split("\"")[1]
-            setattr(my_dict[class_name+"."+my_id],
-                    attribute_name, attribute_value)
+            if class_name not in self.valid_class:
+                print("** class doesn't exist **")
+            else:
+                my_id = arguments[1]
+                attribute_name = arguments[2]
+                attribute_value = arg.split("\"")[1]
+                if class_name+"."+my_id not in my_dict:
+                    print("** no instance found **")
+                else:
+                    if hasattr(eval(class_name), attribute_name):
+                        my_type = eval(type(getattr(eval(class_name), attribute_name)).__name__)
+                        if my_type is int:
+                            attribute_value = int(float(attribute_value))
+                        setattr(my_dict[class_name+"."+my_id], attribute_name, my_type(attribute_value))
+                    else:
+                        setattr(my_dict[class_name+"."+my_id], attribute_name, attribute_value)
+                    models.storage.save()
 
 if __name__ == "__main__":
     HBNBCommand().cmdloop()
