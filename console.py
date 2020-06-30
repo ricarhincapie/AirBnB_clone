@@ -74,7 +74,7 @@ class HBNBCommand(cmd.Cmd):
                     objects = models.storage.all()
                     try:
                         print(objects[".".join(arguments)])
-                    except:
+                    except Exception:
                         print("** no instance found **")
 
     def do_destroy(self, arg):
@@ -97,7 +97,7 @@ class HBNBCommand(cmd.Cmd):
                         del objects[".".join(arguments)]
                         models.storage.save()
                         models.storage.reload()
-                    except:
+                    except Exception:
                         print("** no instance found **")
 
     def do_all(self, arg):
@@ -132,45 +132,49 @@ class HBNBCommand(cmd.Cmd):
         if len(arguments) == 0:
             print("** class name missing **")
         elif len(arguments) == 1:
-            class_name = arguments[0]
-            if class_name not in self.valid_class:
+            cls_name = arguments[0]
+            if cls_name not in self.valid_class:
                 print("** class doesn't exist **")
             else:
                 print("** instance id missing **")
         elif len(arguments) == 2:
-            class_name = arguments[0]
-            if class_name not in self.valid_class:
+            cls_name = arguments[0]
+            if cls_name not in self.valid_class:
                 print("** class doesn't exist **")
             else:
                 my_id = arguments[1]
-                if class_name+"."+my_id not in my_dict:
+                if cls_name+"."+my_id not in my_dict:
                     print("** no instance found **")
                 else:
-                    print("** attribute name missing **")  # Id validation pending
+                    print("** attribute name missing **")
         elif len(arguments) == 3:
-            if class_name not in self.valid_class:
+            if cls_name not in self.valid_class:
                 print("** class doesn't exist **")
             else:
                 print("** value missing **")
         else:
-            class_name = arguments[0]
-            if class_name not in self.valid_class:
+            cls_name = arguments[0]
+            if cls_name not in self.valid_class:
                 print("** class doesn't exist **")
             else:
                 my_id = arguments[1]
-                attribute_name = arguments[2]
-                attribute_value = arg.split("\"")[1]
-                if class_name+"."+my_id not in my_dict:
+                attr_name = arguments[2]
+                attr_val = arg.split("\"")[1]
+                if cls_name+"."+my_id not in my_dict:
                     print("** no instance found **")
                 else:
-                    if hasattr(eval(class_name), attribute_name):
-                        my_type = eval(type(getattr(eval(class_name), attribute_name)).__name__)
+                    if hasattr(eval(cls_name), attr_name):
+                        temp_attr = getattr(eval(cls_name), attr_name)
+                        my_type = eval(type(temp_attr).__name__)
                         if my_type is int:
-                            attribute_value = int(float(attribute_value))
-                        setattr(my_dict[class_name+"."+my_id], attribute_name, my_type(attribute_value))
+                            attr_val = int(float(attr_val))
+                        key = cls_name+"."+my_id
+                        setattr(my_dict[key], attr_name, my_type(attr_val))
                     else:
-                        setattr(my_dict[class_name+"."+my_id], attribute_name, attribute_value)
+                        key = cls_name+"."+my_id
+                        setattr(my_dict[key], attr_name, attr_val)
                     models.storage.save()
+
 
 if __name__ == "__main__":
     HBNBCommand().cmdloop()
