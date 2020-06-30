@@ -49,6 +49,7 @@ class HBNBCommand(cmd.Cmd):
         if len(arg) <= 0:
             print("** class name missing **")
         else:
+            arg = arg.split()[0]
             if arg in self.valid_class:
                 new_obj = eval(arg)()
                 new_obj.save()
@@ -76,7 +77,7 @@ class HBNBCommand(cmd.Cmd):
                 else:
                     objects = models.storage.all()
                     try:
-                        print(objects[".".join(arguments)])
+                        print(objects[arguments[0] + "." + arguments[1]])
                     except Exception:
                         print("** no instance found **")
 
@@ -97,7 +98,8 @@ class HBNBCommand(cmd.Cmd):
                 else:
                     objects = models.storage.all()
                     try:
-                        del objects[".".join(arguments)]
+                        key = arguments[0] + "." + arguments[1]
+                        del objects[key]
                         models.storage.save()
                         models.storage.reload()
                     except Exception:
@@ -111,10 +113,10 @@ class HBNBCommand(cmd.Cmd):
         """
         my_arr = []
         if len(arg) > 0:
-            if arg in self.valid_class:
+            if arg.split()[0] in self.valid_class:
                 my_dict = models.storage.all()
                 for key, value in my_dict.items():
-                    if key.split(".")[0] == arg:
+                    if key.split(".")[0] == arg.split()[0]:
                         my_arr.append(str(value))
                 print(my_arr)
             else:
@@ -151,6 +153,7 @@ class HBNBCommand(cmd.Cmd):
                 else:
                     print("** attribute name missing **")
         elif len(arguments) == 3:
+            cls_name = arguments[0]
             if cls_name not in self.valid_class:
                 print("** class doesn't exist **")
             else:
