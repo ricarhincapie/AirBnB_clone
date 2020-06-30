@@ -127,53 +127,40 @@ class HBNBCommand(cmd.Cmd):
         Arguments:
         update [Class name] [Object's id] [Attribute name] [Attribute value]
         """
-        arguments = arg.split()
-        my_dict = models.storage.all()
-        if len(arguments) == 0:
+        try:
+            if not line:
+                raise SyntaxError()
+            my_list = split(line, " ")
+            if my_list[0] not in self.all_classes:
+                raise NameError()
+            if len(my_list) < 2:
+                raise IndexError()
+            objects = storage.all()
+            key = my_list[0] + '.' + my_list[1]
+            if key not in objects:
+                raise KeyError()
+            if len(my_list) < 3:
+                raise AttributeError()
+            if len(my_list) < 4:
+                raise ValueError()
+            v = objects[key]
+            try:
+                v.__dict__[my_list[2]] = eval(my_list[3])
+            except Exception:
+                v.__dict__[my_list[2]] = my_list[3]
+                v.save()
+        except SyntaxError:
             print("** class name missing **")
-        elif len(arguments) == 1:
-            cls_name = arguments[0]
-            if cls_name not in self.valid_class:
-                print("** class doesn't exist **")
-            else:
-                print("** instance id missing **")
-        elif len(arguments) == 2:
-            cls_name = arguments[0]
-            if cls_name not in self.valid_class:
-                print("** class doesn't exist **")
-            else:
-                my_id = arguments[1]
-                if cls_name+"."+my_id not in my_dict:
-                    print("** no instance found **")
-                else:
-                    print("** attribute name missing **")
-        elif len(arguments) == 3:
-            if cls_name not in self.valid_class:
-                print("** class doesn't exist **")
-            else:
-                print("** value missing **")
-        else:
-            cls_name = arguments[0]
-            if cls_name not in self.valid_class:
-                print("** class doesn't exist **")
-            else:
-                my_id = arguments[1]
-                attr_name = arguments[2]
-                attr_val = arg.split("\"")[1]
-                if cls_name+"."+my_id not in my_dict:
-                    print("** no instance found **")
-                else:
-                    if hasattr(eval(cls_name), attr_name):
-                        temp_attr = getattr(eval(cls_name), attr_name)
-                        my_type = eval(type(temp_attr).__name__)
-                        if my_type is int:
-                            attr_val = int(float(attr_val))
-                        key = cls_name+"."+my_id
-                        setattr(my_dict[key], attr_name, my_type(attr_val))
-                    else:
-                        key = cls_name+"."+my_id
-                        setattr(my_dict[key], attr_name, attr_val)
-                    models.storage.save()
+        except NameError:
+            print("** class doesn't exist **")
+        except IndexError:
+            print("** instance id missing **")
+        except KeyError:
+            print("** no instance found **")
+        except AttributeError:
+            print("** attribute name missing **")
+        except ValueError:
+            print("** value missing **")
 
 
 if __name__ == "__main__":
