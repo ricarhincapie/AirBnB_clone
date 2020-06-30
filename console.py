@@ -180,7 +180,19 @@ class HBNBCommand(cmd.Cmd):
                         key = cls_name+"."+my_id
                         setattr(my_dict[key], attr_name, attr_val)
                     models.storage.save()
-
+    def default(self, line):
+        my_class  = line.split(".")[0]
+        my_method = line.split(".")[1]
+        if my_method == "all()":   
+            my_array = []
+            my_dict = models.storage.all()
+            for key in my_dict.keys():
+                tmp_key = key.split(".")[0]
+                if tmp_key == my_class:
+                    my_array.append(str(my_dict[key]))
+            print(my_array)
+        else:
+            print("", end="")
 
 if __name__ == "__main__":
     HBNBCommand().cmdloop()
