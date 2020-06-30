@@ -66,7 +66,10 @@ class HBNBCommand(cmd.Cmd):
         else:
             arguments = arg.split()
             if len(arguments) == 1:
-                print("** instance id missing **")
+                if arguments[0] not in self.valid_class:
+                    print("** class doesn't exist **")
+                else:
+                    print("** instance id missing **")
             else:
                 if arguments[0] not in self.valid_class:
                     print("** class doesn't exist **")
