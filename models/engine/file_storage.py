@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/python3
 """File storage module creates the methods to save HBNB changes in a
 temporary file
 """

@@ -4,8 +4,8 @@ Unit testing
 """
 
 import unittest
-from models.city import City
-from models import city
+from models.user import User
+from models import user
 import pep8
 
 
@@ -14,8 +14,8 @@ class TestPep8B(unittest.TestCase):
     def test_pep8(self):
         """ test base and test_base for pep8 conformance """
         style = pep8.StyleGuide(quiet=True)
-        file1 = 'models/city.py'
-        file2 = 'tests/test_models/test_city.py'
+        file1 = 'models/user.py'
+        file2 = 'tests/test_models/test_user.py'
         result = style.check_files([file1, file2])
         self.assertEqual(result.total_errors, 0,
                          "Found code style errors (and warning).")
@@ -25,42 +25,49 @@ class TestDocsB(unittest.TestCase):
     """ Check for documentation. """
     def test_module_doc(self):
         """ check for module documentation """
-        self.assertTrue(len(city.__doc__) > 0)
+        self.assertTrue(len(user.__doc__) > 0)
 
     def test_class_doc(self):
         """ check for documentation """
-        self.assertTrue(len(city.__doc__) > 0)
+        self.assertTrue(len(user.__doc__) > 0)
 
     def test_method_docs(self):
         """ check for method documentation """
-        for func in dir(City):
+        for func in dir(User):
             self.assertTrue(len(func.__doc__) > 0)
 
 
-class TestCity(unittest.TestCase):
+class TestState(unittest.TestCase):
     """
-    City class unit testing
+    State class unit testing
     """
     def setUp(self):
         """
         Definign environment
         """
-        self.city1 = City()
+        self.user1 = User()
 
     def test_data_type(self):
         """
         Test data types
         """
-        self.assertTrue(hasattr(self.city1, "name"))
-        self.assertEqual(type(self.city1.name), str)
-        self.assertTrue(hasattr(self.city1, "state_id"))
-        self.assertEqual(type(self.city1.state_id), str)
+        self.assertTrue(hasattr(self.user1, "email"))
+        self.assertEqual(type(self.user1.email), str)
+
+        self.assertTrue(hasattr(self.user1, "password"))
+        self.assertEqual(type(self.user1.password), str)
+
+        self.assertTrue(hasattr(self.user1, "first_name"))
+        self.assertEqual(type(self.user1.first_name), str)
+
+        self.assertTrue(hasattr(self.user1, "last_name"))
+        self.assertEqual(type(self.user1.last_name), str)
 
     def test_instantation(self):
         """
         Test instantation
         """
-        self.assertIsInstance(self.city1, City)
+        self.assertIsInstance(self.user1, User)
 
 
 if __name__ == "__main__":

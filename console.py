@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/python3
 """ Console module creates a command-line console to manage HBNB DB
 """
 

@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/python3
 """
 Base Model module defines the BaseModel class, its attributes
 and methods.
