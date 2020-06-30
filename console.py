@@ -191,7 +191,7 @@ class HBNBCommand(cmd.Cmd):
                 if tmp_key == my_class:
                     my_array.append(str(my_dict[key]))
             print(my_array)
-        if my_method == "count()":
+        elif my_method == "count()":
             suma = 0
             my_dict = models.storage.all()
             for key in my_dict.keys():
