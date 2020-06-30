@@ -183,6 +183,7 @@ class HBNBCommand(cmd.Cmd):
     def default(self, line):
         my_class  = line.split(".")[0]
         my_method = line.split(".")[1]
+        for_show_id = line.split("\"")
         if my_method == "all()":   
             my_array = []
             my_dict = models.storage.all()
@@ -199,6 +200,15 @@ class HBNBCommand(cmd.Cmd):
                 if tmp_key == my_class:
                     suma += 1
             print(suma)
+        elif len(for_show_id) > 0:
+             my_dict = models.storage.all()
+             for key in my_dict.keys():
+                tmp_key = key.split(".")[0]
+                if tmp_key == my_class:
+                    
+
+
+
         else:
             print("", end="")
 
