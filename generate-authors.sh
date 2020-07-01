@@ -11,5 +11,5 @@ cd "$(dirname "$(readlink -f "$BASH_SOURCE")")/."
 		# For how it is generated, see `generate-authors.sh`.
 	EOH
 	echo
-	git log --format='%aN <%ae>' | LC_ALL=C.UTF-8 sort -uf | sed 2d 
+	git log --format='%aN <%ae>' | LC_ALL=C.UTF-8 sort -uf
 } > AUTHORS
