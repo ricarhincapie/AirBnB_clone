@@ -181,35 +181,36 @@ class HBNBCommand(cmd.Cmd):
                         setattr(my_dict[key], attr_name, attr_val)
                     models.storage.save()
     def default(self, line):
-        my_class  = line.split(".")[0]
-        my_method = line.split(".")[1]
-        for_show_id = line.split("\"")
-        if my_method == "all()":   
-            my_array = []
-            my_dict = models.storage.all()
-            for key in my_dict.keys():
-                tmp_key = key.split(".")[0]
-                if tmp_key == my_class:
-                    my_array.append(str(my_dict[key]))
-            print(my_array)
-        elif my_method == "count()":
-            suma = 0
-            my_dict = models.storage.all()
-            for key in my_dict.keys():
-                tmp_key = key.split(".")[0]
-                if tmp_key == my_class:
-                    suma += 1
-            print(suma)
-        elif len(for_show_id) > 0:
-             my_dict = models.storage.all()
-             for key in my_dict.keys():
-                tmp_key = key.split(".")[0]
-                if tmp_key == my_class:
-                    
-
-
-
-        else:
+        try:
+            my_class  = line.split(".")[0]
+            my_method = line.split(".")[1]
+            for_show_id = line.split("\"")
+            if my_method == "all()":   
+                my_array = []
+                my_dict = models.storage.all()
+                for key in my_dict.keys():
+                    tmp_key = key.split(".")[0]
+                    if tmp_key == my_class:
+                        my_array.append(str(my_dict[key]))
+                print(my_array)
+            elif my_method == "count()":
+                suma = 0
+                my_dict = models.storage.all()
+                for key in my_dict.keys():
+                    tmp_key = key.split(".")[0]
+                    if tmp_key == my_class:
+                        suma += 1
+                print(suma)
+            elif len(for_show_id) > 0:
+                cls_name = line.split(".")[0]
+                cls_id = line.split("\"")[1]
+                method = line.split(".")[1].split("(")[0]
+                if method == "show":
+                    self.do_show(cls_name+" "+cls_id)
+                elif method == "destroy":
+                    self.do_destroy(cls_name+" "+cls_id)
+                
+        except Exception:
             print("", end="")
 
 if __name__ == "__main__":
