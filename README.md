@@ -1,6 +1,11 @@
+![AirBnb Clone Project](images/AirBnb_Clone_Portrait.png)
+
+
 # AIRBNB CLONE - THE CONSOLE
 This repository implements the Control Console for the AirBnb clone project and the
 first stage for a DB implementation related to the class instances' serialization and deserialization process.
+
+
 It has a Unittest suite test for a 100% quality software.
 
 ## Use examples
