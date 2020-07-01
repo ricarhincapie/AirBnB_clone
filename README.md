@@ -1,4 +1,4 @@
-![AirBnb Clone Project](images/AirBnb_Clone_Portrait.png)
+![AirBnb Clone Project](images/AirBnb_Clone_Portrait.gif)
 
 
 # AIRBNB CLONE - THE CONSOLE
