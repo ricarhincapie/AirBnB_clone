@@ -220,12 +220,15 @@ class HBNBCommand(cmd.Cmd):
                         attr_val = line.split("\"")[5]
                     else:
                         attr_val = attr_val_int
+                        qte = ""
                     qte = "\""
                     self.do_update(cls_name+" "+cls_id +
                                    " " + attr_name+" "+qte+attr_val+qte)
+                    # new = line.split("(")[1].split(")")[0]
+                    # print(new)
 
-        except Exception:
-            print("", end="")
-
+        except Exception as e:
+            print("Error", end="")
+            print(e)
 if __name__ == "__main__":
     HBNBCommand().cmdloop()
