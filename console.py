@@ -180,12 +180,16 @@ class HBNBCommand(cmd.Cmd):
                         key = cls_name+"."+my_id
                         setattr(my_dict[key], attr_name, attr_val)
                     models.storage.save()
+
     def default(self, line):
+        """default sets expected behaviour for commands not
+        recognized by CMD module.
+        """
         try:
-            my_class  = line.split(".")[0]
+            my_class = line.split(".")[0]
             my_method = line.split(".")[1]
             for_show_id = line.split("\"")
-            if my_method == "all()":   
+            if my_method == "all()":
                 my_array = []
                 my_dict = models.storage.all()
                 for key in my_dict.keys():
@@ -209,7 +213,17 @@ class HBNBCommand(cmd.Cmd):
                     self.do_show(cls_name+" "+cls_id)
                 elif method == "destroy":
                     self.do_destroy(cls_name+" "+cls_id)
-                
+                elif method == "update":
+                    attr_name = line.split("\"")[3]
+                    attr_val_int = line.split(" ")[2].split(")")[0]
+                    if attr_val_int[0] == "\"":
+                        attr_val = line.split("\"")[5]
+                    else:
+                        attr_val = attr_val_int
+                    qte = "\""
+                    self.do_update(cls_name+" "+cls_id +
+                                   " " + attr_name+" "+qte+attr_val+qte)
+
         except Exception:
             print("", end="")
 
