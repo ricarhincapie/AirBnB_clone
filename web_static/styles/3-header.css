@@ -5,15 +5,9 @@ header {
     border-bottom: 1px solid #CCCCCC;
 }
 
-header IMG {
-    float: left;
-    vertical-align: middle;
-    padding-left: 20px;
-}
-
 .logo {
-    background: url("images/logo.png");
+    background: url("../images/logo.png") no-repeat center;
+    padding-left: 20px;
+    width: 142px;
+    height: 60px;
 }
-
-<IMG SRC="https://s3.amazonaws.com/intranet-projects-files/holbertonschool-higher-level_programming+/268/logo.png" ALT="HBNB">
-
